@@ -1,100 +1,83 @@
-###################################################################################
-#     ######      #        #    #   #      #  ##     ##       #####      ######   #
-#     #          # #       #    #    #   #    #  # #  #      #     #     #        #
-#     ###       ####       #    #      #      #   #   #      #     #     ######   #
-#     #        #    #      #    #    #   #    #       #      #     #         #    #
-#     #       #      #     ######  #       #  #       #       ####      ######    #
-###################################################################################
+user = input("type something bozo")
 
 
-################################importing libraries##########################
+def sorting(equation):
+    temp = []
+    tempEquation = []
+    equation = str(equation)
+    for i in equation:
+        temp.append(i)
 
-
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.widgets import Button, RadioButtons, TextBox, Slider
-
-
-##############################defining functions and routines##############################
-
-def grid(this_text_needs_to_be_here):
-    ax.grid()
-    fig.canvas.draw()
-
-def colorfunc(label):
-    l.set_color(label)
-    plt.draw()
-
-def stylefunc(label):
-    l.set_linestyle(label)
-    plt.draw()
-
-def inputText(textThing):
-    secondInput == textThing
-
-
-def submit(text):
-    ydata = eval(text)
-    l.set_ydata(ydata)
-    ax.set_ylim(np.min(ydata), np.max(ydata))
-    plt.draw()
-
-def update(val):
-    global x
-    x = np.arange(-(float(val)), float(val), 0.01)
-    plt.show()
+    for i in range(len(temp)):
 
 
 
+##############################Trig value filter#################################
 
-#######################################defining variables#################################################################
+        if ''.join(temp[i:i + 6]) == 'sin(x)':
+            element = 'np.sin(x)'
+            tempEquation.append(element)
 
-x_startValue = 100
+        if ''.join(temp[i:i + 6]) == 'cos(x)':
+            element = 'np.cos(x)'
+            tempEquation.append(element)
 
-initial_text = " input"
+        if ''.join(temp[i:i + 6]) == 'tan(x)':
+            element = 'np.tan(x)'
+            tempEquation.append(element)
 
-x = np.arange(-(float(x_startValue)), float(x_startValue), 0.01)
-y = x
+################################Exponentiation##############################
 
-fig, ax = plt.subplots()
-l, = ax.plot(x, y, lw=2, color='red') ## (x axis increments, y axis increments , line width, line color)
-fig.subplots_adjust(left=0.3, right=0.99)
+        if ''.join(temp[i:i + 2]) == 'x^':
+            power = temp[i + 2]
+            polynomial = ('x**' + power)
+            tempEquation.append(polynomial)
 
-horizontal = ax.plot()
+################Euler's constant################################################
+        if temp[i] == 'e' and temp[i+1] == '^':
+            exponential = ('np.exp(' + ''.join(temp[i + 2]) + '*' + ''.join(temp[i + 3]) + ')')
+            tempEquation.append(exponential)
 
-Widget_colour = 'lightgoldenrodyellow'
+        if temp[i] == 'e' and temp[i+1] != '^':
+            exponential = ('np.exp(' + temp[i] + ')')
+            tempEquation.append(exponential)
 
-####################################################creating interactive widgets############################################
+##############################mathematical notation###################
+        if temp[i] == '+':
+            tempEquation.append(temp[i])
 
-ax_grid = plt.axes([0.05, 0.15, 0.08, 0.05])
-grid_button = Button(ax_grid, 'Grid', color= Widget_colour, hovercolor='grey')
+        if temp[i] == '/':
+            tempEquation.append(temp[i])
 
+        if temp[i] == '-':
+            tempEquation.append(temp[i])
 
-ax_color = fig.add_axes([0.05, 0.6, 0.15, 0.15], facecolor=Widget_colour)
-color_button = RadioButtons(ax_color, ('red', 'blue', 'green', 'purple'))
+########################spaces####################################
+        if temp[i] == ' ':
+            tempEquation.append(temp[i])
 
+    tempEquation = ['(' + x + ')' for x in tempEquation]
 
-ax_line_option = fig.add_axes([0.05, 0.2, 0.15, 0.15], facecolor=Widget_colour)
-line_option = RadioButtons(ax_line_option, ('-', '--', '-.', ':'))
+    for i in range(len(tempEquation)):
+        if tempEquation[i] == '(+)':
+            tempEquation[i] = '+'
 
+        if tempEquation[i] == '(/)':
+            tempEquation[i] = '/'
 
-ax_box = plt.axes([0.1, 0.9, 0.08, 0.06])
-text_box = TextBox(ax_box, 'Evaluate', initial=initial_text)
+        if tempEquation[i] == '(-)':
+            tempEquation[i] = '-'
 
+        if tempEquation[i] == '( )':
+            tempEquation[i] = ' '
 
+    print(tempEquation)
+    print(''.join(tempEquation))
+    for i in range(len(tempEquation)):
+        if tempEquation[i] == '/' and (tempEquation[i + 1] == ' ' or tempEquation[i +1 ] == ' '):
 
-
-
-
-################################## when interacted with ###################################################
-
-text_box.on_submit(submit)
-
-grid_button.on_clicked(grid)
-
-color_button.on_clicked(colorfunc)
-
-line_option.on_clicked(stylefunc)
+            print('there do be spaces here')
+            if tempEquation[i + 1] == ' ':
 
 
 
@@ -102,7 +85,30 @@ line_option.on_clicked(stylefunc)
 
 
 
+    # for i in range(len(tempEquation)):
+    #     if tempEquation[i] == '/':
+    #
+    #         print('what is up')
+    #
+    #         if tempEquation[i-1][0] == '(':
+    #
+    #             print('good')
+    #
+    #             counter = 1
+    #
+    #             while counter > 0:
+    #                 temp_counter = 0
+    #                 if temp_counter == 0:
+    #                     counter = counter - 1
+    #                     temp_counter == 1
+    #                 for u in range(len(tempEquation[i-1])):
+    #                     if tempEquation[i-1][u] == '(':
+    #                         counter = counter + 1
+    #                     elif tempEquation[i-1][u] == ')':
+    #                         counter = counter - 1
+    #
+    #             print('hello')
 
 
-plt.show()
 
+sorting(user)
