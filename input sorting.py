@@ -71,26 +71,10 @@ def sorting(equation):
         if tempEquation[i] == '( )':
             tempEquation[i] = ' '
 
+    tempEquation.remove(' ')
+
     print(tempEquation)
     print(''.join(tempEquation))
-
-    spacelessEquation = []
-
-    for i in range(len(tempEquation)):
-        if tempEquation[i] == '/' and (tempEquation[i + 1] == ' ' or tempEquation[i - 1] == ' '):
-
-            print('there do be spaces here')
-
-            for u in range(len(tempEquation)):
-                if tempEquation[u] != ' ':
-                    spacelessEquation.append(tempEquation[u])
-
-            del tempEquation[i-2:i+2]
-            tempEquation.insert(i-2, spacelessEquation)
-            print(tempEquation)
-
-
-
 
 
 
@@ -133,3 +117,4 @@ def sorting(equation):
 
 
 sorting(user)
+
