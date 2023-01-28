@@ -8,38 +8,76 @@ match comparison_list:
     case _:
         print("Nothing was matched")
 
+user = input('what up')
 
 
-def sorting():
-    finished = False
-    equation = []
-    while not finished:
-        user = input('put something in')
-        match user:
+def sorting(equation):
+    temp = ['']
+    tempcharacters = []
+    tempEquation = []
+
+
+    equation = str(equation)
+    for i in equation:
+        temp.append(i)
+    temp.append('')
+
+    for i in range(len(temp)):
+        match ''.join(temp[i:i + 3]):
             case 'sin':
+                match temp[i + 3]:
+                    case '(':
+                        bracket = True
+                        tempcounter = 1
+                        while bracket:
+                            while tempcounter != 0:
+                                if temp[i + 3 + tempcounter] == ')':
+                                    tempEquation.append('np.sin(' + ''.join(tempcharacters) + ')')
+                                    bracket = False
+                                    tempcounter = 0
+                                else:
+                                    tempcharacters.append(temp[i + 3 + tempcounter])
+                                    tempcounter = tempcounter + 1
 
-                trigvalue = input('enter what value of sin you would like the graph to take')
-                equation.append('sin'+'('+trigvalue+')')
-                equation.append(' ')
-                print(equation)
+                    case _:
+                        print('error')
 
             case 'cos':
-                trigvalue = input('enter what value of cos you would like the graph to take')
-                equation.append('cos' + '(' + trigvalue + ')')
-                equation.append(' ')
-                print(equation)
+                match temp[i + 3]:
+                    case '(':
+                        bracket = True
+                        tempcounter = 1
+                        while bracket:
+                            while tempcounter != 0:
+                                if temp[i + 3 + tempcounter] == ')':
+                                    tempEquation.append('np.cos(' + ''.join(tempcharacters) + ')')
+                                    bracket = False
+                                    tempcounter = 0
+                                else:
+                                    tempcharacters.append(temp[i + 3 + tempcounter])
+                                    tempcounter = tempcounter + 1
+
+                    case _:
+                        print('error')
+
+            case 'tan':
+                match temp[i + 3]:
+                    case '(':
+                        bracket = True
+                        tempcounter = 1
+                        while bracket:
+                            while tempcounter != 0:
+                                if temp[i + 3 + tempcounter] == ')':
+                                    tempEquation.append('np.tan(' + ''.join(tempcharacters) + ')')
+                                    bracket = False
+                                    tempcounter = 0
+                                else:
+                                    tempcharacters.append(temp[i + 3 + tempcounter])
+                                    tempcounter = tempcounter + 1
+
+                    case _:
+                        print('error')
+        match
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-sorting()
+sorting(user)
