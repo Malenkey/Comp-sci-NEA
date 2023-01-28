@@ -1,13 +1,3 @@
-comparison_list = ["one", "two", "three"]
-
-match comparison_list:
-    case ['one']:
-        print("this is the first element: {first}")
-    case [first, *rest]:
-        print("This is the first: {first}, and this is the rest: {rest}")
-    case _:
-        print("Nothing was matched")
-
 user = input('please ensure that brackets are around all')
 
 
@@ -15,7 +5,6 @@ def sorting(equation):
     temp = ['', '', '']
     tempcharacters = []
     tempEquation = []
-
 
     equation = str(equation)
     for i in equation:
@@ -79,7 +68,7 @@ def sorting(equation):
                         print('error')
         match temp[i]:
             case 'x':
-                match temp[i-2]:
+                match temp[i - 2]:
                     case 'n':
                         print('error')
                     case 's':
@@ -87,7 +76,7 @@ def sorting(equation):
 
                     case _:
                         print('hello')
-                match temp[i+1]:
+                match temp[i + 1]:
                     case '^':
                         tempEquation.append()
 
