@@ -8,11 +8,11 @@ match comparison_list:
     case _:
         print("Nothing was matched")
 
-user = input('what up')
+user = input('please ensure that brackets are around all')
 
 
 def sorting(equation):
-    temp = ['']
+    temp = ['', '', '']
     tempcharacters = []
     tempEquation = []
 
@@ -77,7 +77,21 @@ def sorting(equation):
 
                     case _:
                         print('error')
-        match
+        match temp[i]:
+            case 'x':
+                match temp[i-2]:
+                    case 'n':
+                        print('error')
+                    case 's':
+                        print('error')
+
+                    case _:
+                        print('hello')
+                match temp[i+1]:
+                    case '^':
+                        tempEquation.append()
+
+    print(tempEquation)
 
 
 sorting(user)
