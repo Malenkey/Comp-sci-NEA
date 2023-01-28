@@ -15,6 +15,7 @@ def sorting(equation):
 ##############################Trig value filter#################################
 
         if ''.join(temp[i:i + 6]) == 'sin(x)':
+
             element = 'np.sin(x)'
             tempEquation.append(element)
 
