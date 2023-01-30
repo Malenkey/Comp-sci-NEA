@@ -1,6 +1,28 @@
 user = input('please ensure that brackets are around all')
 
 
+
+# TODO: checklist
+# #trig
+# #powers
+# #standalone numbers
+# #mathematical notation
+# #fractions
+# #spaces (multiplications or seperations with fractions)
+# #addressable issues
+
+#checklist
+#trig
+#powers
+#standalone numbers
+#mathematical notation
+#fractions
+#spaces (multiplications or seperations with fractions)
+#addressable issues
+#1: example : sin(20x^1234)
+# will append (sin(20x^1234), x^1234) as temp[i-2] != 'n'
+#solution iterate backwards until '(' is found and n or s is found before that,
+# or ')' is found meaning that it is not part of any trig; then append '*'
 def sorting(equation):
     temp = ['', '', '']
 
@@ -83,6 +105,8 @@ def sorting(equation):
 
                         elif temp[i - 2] == 's':
                             trig = True
+                        elif temp[i - 2] == 'e':
+                            trig = True
 
                         else:
                             while temp[i + tempcounter].isdigit():
@@ -90,9 +114,26 @@ def sorting(equation):
                                 trig = False
 
                         if not trig:
-                            tempEquation.append('x**' + ''.join(temp[i + 2: i - 1 + tempcounter]))
+                            tempEquation.append('x**' + ''.join(temp[i + 2: i + tempcounter]))
 
-        # match temp[i]:
+        match temp[i]:
+            case  'e':
+                match temp[i+1]:
+                    case '^':
+                        tempcounter = 2
+
+                        while temp[i+tempcounter] != 'x':
+                            tempcounter = tempcounter + 1
+                        tempstring = ''.join(temp[i+2: i+tempcounter])
+                        tempnumber = i+tempcounter
+                        while temp[i+ tempcounter + 1].isdigit():
+                            tempcounter = tempcounter + 1
+
+
+
+
+
+
 
     print(tempEquation)
 
