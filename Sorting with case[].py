@@ -105,15 +105,21 @@ def sorting(equation):
                 match temp[i + 1]:
                     case '^':
                         tempcounter = 2
+                        tempcounter2 = 1
                         trig = False
+                        bracket = False
+                        while not bracket:
+                            if temp[i - tempcounter2 ] == '(':
+                                bracket = True
+                                if temp[i - tempcounter2 - 1] == 'n':
+                                    trig == True
 
-                        if temp[i - 2] == 'n':
-                            trig = True
+                                elif temp[i - tempcounter2 - 1] == 's':
+                                    trig == True
+                                else
 
-                        elif temp[i - 2] == 's':
-                            trig = True
-                        elif temp[i - 2] == 'e':
-                            trig = True
+
+
 
                         else:
                             while temp[i + tempcounter].isdigit():
