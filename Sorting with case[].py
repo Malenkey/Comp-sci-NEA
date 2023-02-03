@@ -113,7 +113,6 @@ def sorting(equation):
                                 bracket = True
                             tempcounter2 = tempcounter2 + 1
                         if temp[i - tempcounter2] == 'n':
-
                             trig = True
 
                         if temp[i - tempcounter2] == 's':
@@ -123,10 +122,8 @@ def sorting(equation):
                         else:
                             while temp[i + tempcounter].isdigit():
                                 tempcounter = tempcounter + 1
-                        if trig == False:
+                        if not trig:
                             tempEquation.append('x**' + ''.join(temp[i + 2: i + tempcounter]))
-
-
 
         match temp[i]:
             case 'e':
