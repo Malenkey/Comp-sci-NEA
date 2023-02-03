@@ -1,7 +1,6 @@
 user = input('please ensure that brackets are around all')
 
 
-
 # TODO: checklist
 # #trig
 # #powers
@@ -11,25 +10,24 @@ user = input('please ensure that brackets are around all')
 # #spaces (multiplications or seperations with fractions)
 # #addressable issues
 
-#checklist
-#trig
-#powers
-#standalone numbers
-#mathematical notation
-#fractions
-#spaces (multiplications or seperations with fractions)
+# checklist
+# trig
+# powers
+# standalone numbers
+# mathematical notation
+# fractions
+# spaces (multiplications or seperations with fractions)
 
 
-
-#addressable issues
-#1: example : sin(20x^1234)
+# addressable issues
+# 1: example : sin(20x^1234)
 # will append (sin(20x^1234), x^1234) as temp[i-2] != 'n'
-#solution iterate backwards until '(' is found and n or s is found before that,
+# solution iterate backwards until '(' is found and n or s is found before that,
 # or ')' is found meaning that it is not part of any trig; then append '*'
 
-#2: example e^2x^2345
-#appends 'np.exp(2x^2)', 'x**2345']
-#need to distinguish where the power ends and a new term begins
+# 2: example e^2x^2345
+# appends 'np.exp(2x^2)', 'x**2345']
+# need to distinguish where the power ends and a new term begins
 def sorting(equation):
     temp = ['', '', '']
 
@@ -104,51 +102,45 @@ def sorting(equation):
                         print('hello')
                 match temp[i + 1]:
                     case '^':
+
                         tempcounter = 2
                         tempcounter2 = 1
                         trig = False
                         bracket = False
                         while not bracket:
-                            if temp[i - tempcounter2 ] == '(':
+
+                            if temp[i - tempcounter2] == '(':
                                 bracket = True
-                                if temp[i - tempcounter2 - 1] == 'n':
-                                    trig == True
+                            tempcounter2 = tempcounter2 + 1
+                        if temp[i - tempcounter2] == 'n':
 
-                                elif temp[i - tempcounter2 - 1] == 's':
-                                    trig == True
-                                else
+                            trig = True
 
+                        if temp[i - tempcounter2] == 's':
 
-
+                            trig = True
 
                         else:
                             while temp[i + tempcounter].isdigit():
                                 tempcounter = tempcounter + 1
-                                trig = False
-
-                        if not trig:
+                        if trig == False:
                             tempEquation.append('x**' + ''.join(temp[i + 2: i + tempcounter]))
 
+
+
         match temp[i]:
-            case  'e':
-                match temp[i+1]:
+            case 'e':
+                match temp[i + 1]:
                     case '^':
                         tempcounter = 2
 
-                        while temp[i+tempcounter] != 'x':
+                        while temp[i + tempcounter] != 'x':
                             tempcounter = tempcounter + 1
-                        tempstring = ''.join(temp[i+2: i+tempcounter])
+                        tempstring = ''.join(temp[i + 2: i + tempcounter])
                         tempnumber = i + tempcounter
                         while temp[i + tempcounter + 1].isdigit():
                             tempcounter = tempcounter + 1
-                        tempEquation.append('np.exp(' + tempstring + ''.join(temp[tempnumber: i + tempnumber])+')')
-
-
-
-
-
-
-
+                        tempEquation.append('np.exp(' + tempstring + ''.join(temp[tempnumber: i + tempnumber]) + ')')
 
     print(tempEquation)
 
