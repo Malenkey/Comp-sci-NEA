@@ -17,7 +17,7 @@ user = input('please ensure that brackets are around all')
 # mathematical notation
 # fractions
 # spaces (multiplications or seperations with fractions)
-
+#er
 
 # addressable issues
 # 1: example : sin(20x^1234)
