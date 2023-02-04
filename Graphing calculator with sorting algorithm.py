@@ -15,44 +15,8 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Button, RadioButtons, TextBox, Slider
 
 
-##############################defining functions and routines##############################
 
-def grid(this_text_needs_to_be_here):
-    ax.grid()
-    fig.canvas.draw()
-
-
-def colorfunc(label):
-    l.set_color(label)
-    plt.draw()
-
-
-def stylefunc(label):
-    l.set_linestyle(label)
-    plt.draw()
-
-
-def submit(text):
-    ydata = eval(text)
-    l.set_ydata(ydata)
-    ax.set_ylim(np.min(ydata), np.max(ydata))
-    plt.draw()
-
-
-def update(val):
-    global x
-    x = np.arange(-(float(val)), float(val), 0.01)
-    plt.show()
-
-
-def reset(event):
-    zoom_slider.reset()
-
-
-def zoom_min_change(num):
-    return x == np.arange(-(float(num)), float(num), 0.01), plt.draw()
-
-########################Sorting Algorithm###########################################
+#################################sorting equation###################################
 def sorting(equation):
     temp = ['', '', '']
 
@@ -177,6 +141,57 @@ def sorting(equation):
                         while temp[i + tempcounter + 1] != ')':
                             tempcounter = tempcounter + 1
                         tempEquation.append('np.exp(' + tempstring + ''.join(temp[tempnumber: i + tempcounter+1]) + ')')
+
+
+    equation = []
+    for i in range(len(tempEquation)):
+
+        equation.append(tempEquation[i])
+        equation.append('*')
+
+
+    del equation[1+len(tempEquation)]
+    equation = ''.join(equation)
+    return equation
+##############################defining functions and routines##############################
+
+def grid(this_text_needs_to_be_here):
+    ax.grid()
+    fig.canvas.draw()
+
+
+def colorfunc(label):
+    l.set_color(label)
+    plt.draw()
+
+
+def stylefunc(label):
+    l.set_linestyle(label)
+    plt.draw()
+
+
+def submit(text):
+    equation = sorting(text)
+    ydata = eval(equation)
+    l.set_ydata(ydata)
+    ax.set_ylim(np.min(ydata), np.max(ydata))
+    plt.draw()
+
+
+def update(val):
+    global x
+    x = np.arange(-(float(val)), float(val), 0.01)
+    plt.show()
+
+
+def reset(event):
+    zoom_slider.reset()
+
+
+def zoom_min_change(num):
+    return x == np.arange(-(float(num)), float(num), 0.01), plt.draw()
+
+
 
 #######################################defining variables###########################################################
 

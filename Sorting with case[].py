@@ -147,13 +147,15 @@ def sorting(equation):
                             tempcounter = tempcounter + 1
                         tempEquation.append('np.exp(' + tempstring + ''.join(temp[tempnumber: i + tempcounter+1]) + ')')
 
-    print(tempEquation)
+
     equation = []
     for i in range(len(tempEquation)):
-        print(tempEquation)
-        print(equation)
+
         equation.append(tempEquation[i])
         equation.append('*')
+
+
     del equation[len(tempEquation)]
-    print(equation)
+    equation = ''.join(equation)
+    return print(equation)
 sorting(user)
