@@ -149,13 +149,16 @@ def sorting(equation):
 
 
     equation = []
+
+    tempEquation = ['(' + x + ')' for x in tempEquation]
+
     for i in range(len(tempEquation)):
 
         equation.append(tempEquation[i])
         equation.append('*')
 
 
-    del equation[len(tempEquation)]
+    equation.pop()
     equation = ''.join(equation)
     return print(equation)
 sorting(user)

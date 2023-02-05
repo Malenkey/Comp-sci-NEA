@@ -15,7 +15,6 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Button, RadioButtons, TextBox, Slider
 
 
-
 #################################sorting equation###################################
 def sorting(equation):
     temp = ['', '', '']
@@ -144,15 +143,23 @@ def sorting(equation):
 
 
     equation = []
+
+    tempEquation = ['(' + x + ')' for x in tempEquation]
     for i in range(len(tempEquation)):
 
         equation.append(tempEquation[i])
         equation.append('*')
 
+    equation.pop()
+    final = ''.join(equation)
 
-    del equation[1+len(tempEquation)]
-    equation = ''.join(equation)
-    return equation
+    ydata = eval(final)
+    l.set_ydata(ydata)
+    ax.set_ylim(np.min(ydata), np.max(ydata))
+    plt.draw()
+
+
+
 ##############################defining functions and routines##############################
 
 def grid(this_text_needs_to_be_here):
@@ -172,6 +179,7 @@ def stylefunc(label):
 
 def submit(text):
     equation = sorting(text)
+    print(equation)
     ydata = eval(equation)
     l.set_ydata(ydata)
     ax.set_ylim(np.min(ydata), np.max(ydata))
@@ -192,7 +200,6 @@ def zoom_min_change(num):
     return x == np.arange(-(float(num)), float(num), 0.01), plt.draw()
 
 
-
 #######################################defining variables###########################################################
 
 x_startValue = 100
@@ -203,7 +210,7 @@ x = np.arange(-(float(x_startValue)), float(x_startValue), 0.01)
 y = x
 
 fig, ax = plt.subplots()
-l, = ax.plot(x, y, lw=2, color='red')  ## (x axis increments, y axis increments , line width, line color)
+l, = ax.plot(x, y, lw=2, color='red')  # (x axis increments, y axis increments , line width, line color)
 fig.subplots_adjust(left=0.3, right=0.99)
 
 horizontal = ax.plot()
@@ -241,7 +248,7 @@ zoom_min = TextBox(ax_zoom_min, 'zoom val', initial=str(x_startValue))
 
 ################################## when interacted with ###################################################
 
-text_box.on_submit(submit)
+text_box.on_submit(sorting)
 
 grid_button.on_clicked(grid)
 
