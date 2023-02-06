@@ -1,20 +1,28 @@
-user = input("type something bozo")
-
-
-
-
-
-
+user = ['np.sin(x)']
 def differential(equation):
-    temp = []
-    equation = str(equation)
-    for i in equation:
-        temp.append(i)
+    diffEquation = []
+    bracket = False
+    for i in range(len(equation)):
+        if len(equation[i]) > 5:
+            match equation[i][0:6]:
+                case 'np.sin':
+                    while not bracket:
 
-    for i in range (len(temp)):
-        if ''.join(temp[i:i+6]) == 'sin(x)':
-            element = 'np.sin(x)'
-            print(element)
+
+                    diffEquation.append('cos(x)')
+                    print(diffEquation)
+                case 'np.cos':
+                    while not bracket:
+
+                    diffEquation.append('-(np.sin(x))')
+                    print(diffEquation)
+                case 'np.tan':
+                    while not bracket:
+
+                    diffEquation.append('cos(x)')
+                    print(diffEquation)
+
+
 
 
 
@@ -23,3 +31,4 @@ def integral(equation):
 
 
 differential(user)
+print(user[0][2])
