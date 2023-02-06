@@ -100,6 +100,14 @@ def sorting(equation):
                         print('error')
         match temp[i]:
             case 'x':
+                match temp[i-1]:
+                    case ')':
+                        tempEquation.append('x')
+                    case'':
+                        match temp[i+1]:
+                            case_
+
+                        tempEquation.append('x')
 
                 match temp[i + 1]:
                     case '^':
@@ -146,19 +154,20 @@ def sorting(equation):
                         while temp[i + tempcounter + 1] != ')':
                             tempcounter = tempcounter + 1
                         tempEquation.append('np.exp(' + tempstring + ''.join(temp[tempnumber: i + tempcounter+1]) + ')')
+        # match temp[i]:
+        #     case temp[i] ==):
 
 
-    equation = []
 
+
+    print(tempEquation)
     tempEquation = ['(' + x + ')' for x in tempEquation]
-
+    equation = []
     for i in range(len(tempEquation)):
-
+        print(tempEquation)
+        print(equation)
         equation.append(tempEquation[i])
         equation.append('*')
-
-
     equation.pop()
-    equation = ''.join(equation)
-    return print(equation)
+    print(''.join(equation))
 sorting(user)
