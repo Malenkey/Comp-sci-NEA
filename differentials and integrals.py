@@ -1,4 +1,4 @@
-user = ['np.sin(x)']
+user = ['np.tan(x)']
 def differential(equation):
     diffEquation = []
     bracket = False
@@ -6,20 +6,19 @@ def differential(equation):
         if len(equation[i]) > 5:
             match equation[i][0:6]:
                 case 'np.sin':
-                    while not bracket:
-
+                    # while not bracket:
 
                     diffEquation.append('cos(x)')
                     print(diffEquation)
                 case 'np.cos':
-                    while not bracket:
+                    # while not bracket:
 
                     diffEquation.append('-(np.sin(x))')
                     print(diffEquation)
                 case 'np.tan':
-                    while not bracket:
+                    # while not bracket:
 
-                    diffEquation.append('cos(x)')
+                    diffEquation.append('1/cos(x)')
                     print(diffEquation)
 
 
