@@ -100,14 +100,14 @@ def sorting(equation):
                         print('error')
         match temp[i]:
             case 'x':
-                match temp[i-1]:
-                    case ')':
-                        tempEquation.append('x')
-                    case'':
-                        match temp[i+1]:
-                            case_
-
-                        tempEquation.append('x')
+                # match temp[i-1]:
+                #     case ')':
+                #         tempEquation.append('x')
+                #     case'':
+                #         match temp[i+1]:
+                #             case_
+                #
+                #         tempEquation.append('x')
 
                 match temp[i + 1]:
                     case '^':
