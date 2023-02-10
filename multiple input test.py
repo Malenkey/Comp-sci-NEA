@@ -52,22 +52,22 @@ fig, ax = plt.subplots()
 l, = ax.plot(x, y, lw=2, color='red')  ## (x axis increments, y axis increments , line width, line color)
 fig.subplots_adjust(left=0.3, right=0.99)
 
-horizontal = ax.plot()
 
 Widget_colour = 'lightgoldenrodyellow'
 
 ####################################################creating interactive widgets###################################
+ax_grid = plt.axes([0.1, 0.75, 0.08, 0.05])
+ax_box = plt.axes([0.05, 0.6, 0.2, 0.06])
+ax_line_option = fig.add_axes([0.1, 0.8, 0.07, 0.15], facecolor=Widget_colour)
+ax_color = fig.add_axes([0.02, 0.7, 0.08, 0.25], facecolor=Widget_colour)
 
-ax_grid = plt.axes([0.05, 0.15, 0.08, 0.05])
+
 grid_button = Button(ax_grid, 'Grid', color=Widget_colour, hovercolor='grey')
 
-ax_color = fig.add_axes([0.02, 0.7, 0.08, 0.25], facecolor=Widget_colour)
 color_button = RadioButtons(ax_color, ('red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'))
 
-ax_line_option = fig.add_axes([0.1, 0.8, 0.07, 0.15], facecolor=Widget_colour)
 line_option = RadioButtons(ax_line_option, ('-', '--', '-.', ':'))
 
-ax_box = plt.axes([0.1, 0.001, 0.6, 0.06])
 text_box = TextBox(ax_box, 'Evaluate', initial=initial_text)
 
 ################################## when interacted with ###################################################

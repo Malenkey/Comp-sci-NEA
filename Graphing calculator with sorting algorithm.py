@@ -218,7 +218,6 @@ fig, ax = plt.subplots()
 l, = ax.plot(x, y, lw=2, color='red')  # (x axis increments, y axis increments , line width, line color)
 fig.subplots_adjust(left=0.3, right=0.99)
 
-horizontal = ax.plot()
 
 Widget_colour = 'lightgoldenrodyellow'
 

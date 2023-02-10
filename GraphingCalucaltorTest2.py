@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Button, RadioButtons, TextBox, Slider
 
 def grid(this_text_needs_to_be_here):
-    ax.grid()
+    ax.grid(True)
     fig.canvas.draw()
 
 

@@ -1,5 +1,18 @@
-fig, (ax1, ax2) = plt.subplots(1, 2, subplot_kw=dict(projection='polar'))
-ax1.plot(x, y)
-ax2.plot(x, y ** 2)
 
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+r = np.arange(0, 2, 0.01)
+theta = np.cos(r)
+
+fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+ax.plot(theta, r)
+ax.set_rmax(2)
+ax.set_rticks([0.5, 1, 1.5, 2])  # Less radial ticks
+ax.set_rlabel_position(-22.5)  # Move radial labels away from plotted line
+ax.grid(True)
+
+ax.set_title("A line plot on a polar axis", va='bottom')
 plt.show()
