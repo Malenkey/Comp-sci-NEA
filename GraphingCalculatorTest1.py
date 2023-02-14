@@ -59,7 +59,7 @@ x_startValue = 100
 
 initial_text = "Enter input"
 
-x = np.arange(-(float(x_startValue)), float(x_startValue), 0.01)
+x = np.arange(-(float(x_startValue)), float(x_startValue), 1)
 y = x
 
 fig, ax = plt.subplots()
