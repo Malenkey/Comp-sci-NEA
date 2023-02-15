@@ -3,12 +3,16 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Button, RadioButtons, TextBox, Slider
 
 ##########################Functions############################
-def theta_limits(min, max):
+def theta_limits():
     global theta
-    theta = np.arange(min, max, 0.001)
+    theta = np.arange(min, max, 0.1)
 
 def radius_limit(text):
-    ax.plot(theta, text)
+    global l
+    ax.cla()
+    print(eval(text, {"theta": theta, "np": np}))
+    #print(int(eval(text, {"theta": theta, "np": np}))*((np.sin(theta)**2)+(np.cos(theta)**2)))
+    l, = ax.plot(theta, eval(text)*((np.sin(theta)**2)+(np.cos(theta)**2)), color='red')
 
 
 
@@ -23,16 +27,18 @@ def radius_limit(text):
 ######################defining variables
 
 ticks = np.arange(0, 10, 1)
-
-theta_limits(0, 2*np.pi)
+min = 0
+max = 2*np.pi
+theta_limits()
 one = (np.sin(theta)**2)+(np.cos(theta)**2)
-r = one
+
+
 
 
 ########################plotting##############################
 
 fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
-l, = ax.plot(theta, r)
+l, = ax.plot(theta, one)
 ax.set_rmax(5)
 ax.set_rticks(ticks)  # Less radial ticks
 ax.set_rlabel_position(-22.5)  # Move radial labels away from plotted line
@@ -53,7 +59,7 @@ radius_box = TextBox(ax_radius, 'Radius', initial='1')
 
 #######################when interacted with####################
 
-# theta_box1.on_submit()
+# theta_box1.on_submit(theta_limits( ,text))
 # theta_box2.on_submit()
 radius_box.on_submit(radius_limit)
 
