@@ -44,6 +44,7 @@ def submit(text):
 
 
 def polar_toggle(this):
+    plt.close()
     fig, ax == plt.subplots(subplot_kw={'projection': 'polar'}), plt.show()
 
 
