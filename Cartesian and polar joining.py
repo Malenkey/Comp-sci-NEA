@@ -13,15 +13,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Button, RadioButtons, TextBox, Slider
+from subprocess import call
 
 
 ##############################defining functions and routines##############################
 
+class Call_polar(object):
+    def __init__(self, path='Users\keith\PycharmProjects\Comp-sci-NEA\PolarTest2.py'):
+        self.path = path
 
-
+    def call_polar(self, ):
+        call(['python3', '{}'.format(self.path)])
 
 
 def grid(this_text_needs_to_be_here):
+
     ax.grid()
     fig.canvas.draw()
 
@@ -43,8 +49,10 @@ def submit(text):
     plt.draw()
 
 
-def polar_toggle(this):
-    fig, ax == plt.subplots(subplot_kw={'projection': 'polar'}), plt.show()
+def polar_toggle(text):
+    if __name__ == "__main__":
+        c = Call_polar()
+        c.call_polar()
 
 
 #######################################defining variables###########################################################
