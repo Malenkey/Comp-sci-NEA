@@ -9,25 +9,27 @@ def theta_limits(max):
     theta = np.linspace(0, max, 360)
 
 
+def radial(box_input):
+    globals()['radius'] = eval(box_input) * ((np.sin(theta) ** 2) + (np.cos(theta) ** 2))
 
-def radius_limit(text):
-    global polar_l, radius
+
+
+def radius_limit(box_input):
+    global polar_l
     print('hello', theta)
     ax.cla()
-    radius = eval(text) * ((np.sin(theta) ** 2) + (np.cos(theta) ** 2))
+    radial(box_input)
     polar_l = ax.plot(theta, radius, color='red')
-    fig.canvas.draw_idle()
 
 
 def theta_max(val):
     global theta
-
+    print(radius)
+    print(max_slider.val)
     theta_limits(max_slider.val)
-    polar_l.set_xdata(theta)
+    polar_l = ax.plot(theta, radius, color='red')
 
     fig.canvas.draw_idle()
-
-
 
 
 
@@ -35,10 +37,10 @@ def theta_max(val):
 
 ticks = np.arange(0, 10, 1)
 min = 0
-max = 2*np.pi
+max = 2 * np.pi
 theta_limits(max)
 one = (np.sin(theta) ** 2) + (np.cos(theta) ** 2)
-
+radial('1')
 ########################plotting##############################
 
 fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
@@ -53,7 +55,7 @@ fig.subplots_adjust(left=0.3, right=0.99)
 ax_thetaMax = fig.add_axes([0.25, 0.91, 0.65, 0.03])
 ax_radius = plt.axes([0.094 + 0.15, 0.7, 0.08, 0.05])
 
-max_slider = Slider(ax=ax_thetaMax, label='θ max', valmin=0, valmax=(2*np.pi), valinit=max)
+max_slider = Slider(ax=ax_thetaMax, label='θ max', valmin=0, valmax=(2 * np.pi), valinit=max)
 radius_box = TextBox(ax_radius, 'Radius', initial='1')
 
 #######################when interacted with####################
@@ -61,6 +63,7 @@ radius_box = TextBox(ax_radius, 'Radius', initial='1')
 # theta_box1.on_submit(theta_limits( ,text))
 # theta_box2.on_submit()
 max_slider.on_changed(theta_max)
+
 radius_box.on_submit(radius_limit)
 
 plt.show()

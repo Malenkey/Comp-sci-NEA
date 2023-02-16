@@ -45,7 +45,7 @@ def submit(text):
 
 def polar_toggle(text):
     plt.close()
-    call(["python", "Polar2.py"])
+    call(["python", "Polar3.py"])
 
 
 
