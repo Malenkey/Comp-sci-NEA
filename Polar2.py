@@ -17,14 +17,7 @@ def radius_limit(text):
 
 
 def theta_max(num):
-    global max, polar_l
-    ax.cla()
-    theta_limits(num)
-
-    polar_l = ax.plot(theta, radius, color='red')
-    print(theta)
-    print(max)
-    plt.show()
+    n
 
 
 ######################defining variables##################
