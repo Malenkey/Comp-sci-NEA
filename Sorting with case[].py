@@ -1,4 +1,4 @@
-user = input('please ensure that brackets are around all')
+user = input('please use brackets when using e ')
 
 
 # TODO: checklist
@@ -23,7 +23,7 @@ user = input('please ensure that brackets are around all')
 # appends 'np.exp(2x^2)', 'x**2345']
 # need to distinguish where the power ends and a new term begins
 def sorting(equation):
-    temp = ['', '', '']
+    temp = []
 
     tempEquation = []
 
@@ -33,37 +33,28 @@ def sorting(equation):
     temp.append('')
 
     for i in range(len(temp)):
-        tempcharacters = []
+        tempcharacters = []  # temporarily holds characters within trignometric or exponential functions
 
-        match temp[i]:
-            case '+':
-                tempEquation.append(temp[i])
-            case '-':
-                tempEquation.append(temp[i])
-            case '/':
-                tempEquation.append(temp[i])
-            case '*':
-                tempEquation.append(temp[i])
         match ''.join(temp[i:i + 3]):
-            case 'sin':
-                match temp[i + 3]:
-                    case '(':
+            case 'sin':  # checks whether the first 3 letters is sin
+                match temp[i + 3]:  # checks whether the next letter is a bracket
+                    case '(':  # if the next letter is a bracket
                         bracket = True
                         tempcounter = 1
                         while bracket:
                             while tempcounter != 0:
                                 if temp[i + 3 + tempcounter] == ')':
                                     tempEquation.append('np.sin(' + ''.join(tempcharacters) + ')')
-                                    bracket = False
-                                    tempcounter = 0
+                                    bracket = False  # exits bracket loop
+                                    tempcounter = 0  # exits tempcounter loop
                                 else:
-                                    tempcharacters.append(temp[i + 3 + tempcounter])
-                                    tempcounter = tempcounter + 1
+                                    tempcharacters.append(temp[i + 3 + tempcounter])  # appends next character along
+                                    tempcounter = tempcounter + 1  # increments counter so next character is processed
 
                     case _:
                         print('error')
 
-            case 'cos':
+            case 'cos':  # match case changed from sin to cos
                 match temp[i + 3]:
                     case '(':
                         bracket = True
@@ -81,7 +72,7 @@ def sorting(equation):
                     case _:
                         print('error')
 
-            case 'tan':
+            case 'tan':  # match case changed from sin to cos
                 match temp[i + 3]:
                     case '(':
                         bracket = True
@@ -98,76 +89,75 @@ def sorting(equation):
 
                     case _:
                         print('error')
+
+        match temp[i]:  # appends mathematical functions when they are seen
+            case '+':
+                tempEquation.append(temp[i])
+            case '-':
+                tempEquation.append(temp[i])
+            case '/':
+                tempEquation.append(temp[i])
+            case '*':
+                tempEquation.append(temp[i])
+
         match temp[i]:
-            case 'x':
-                # match temp[i-1]:
-                #     case ')':
-                #         tempEquation.append('x')
-                #     case'':
-                #         match temp[i+1]:
-                #             case_
-                #
-                #         tempEquation.append('x')
-
+            case 'x':  # searches for x to be a character
                 match temp[i + 1]:
-                    case '^':
-
+                    case '^':  # searches whether it is x with an indice
                         tempcounter = 2
                         tempcounter2 = 1
-                        trig = False
-                        bracket = False
-
+                        trig = False  # makes sure x in a trig function isn't appened twice
+                        bracket = False  # initialises bracket loop
                         while not bracket:
-                            if temp[i - tempcounter2] == '^':
+                            if temp[i - tempcounter2] == '^':  # checks whether its x raised to the x power
                                 bracket = True
-                            if temp[i - tempcounter2] == '':
+                            if temp[i - tempcounter2] == '':  # checks if x is at the start
                                 bracket = True
-                            if temp[i - tempcounter2] == '(':
+                            if temp[i - tempcounter2] == '(':  # checks whether it's the start of a function
                                 bracket = True
-                            if temp[i - tempcounter2] == ')':
+                            if temp[i - tempcounter2] == ')':  # checks if it is in front of a function
                                 bracket = True
                             tempcounter2 = tempcounter2 + 1
 
-                        if temp[i - tempcounter2] == 'n':
+                        if temp[i - tempcounter2] == 'n':  # n would only be present if it is inside sin or tan
                             trig = True
-                        if temp[i - tempcounter2] == 's':
+                        if temp[i - tempcounter2] == 's':  # s would only be present if it is inside cos
                             trig = True
-                        if temp[i - tempcounter2] == 'e':
+                        if temp[i - tempcounter2] == 'e':  # would only be present if Eulers constant is in use
                             trig = True
 
                         else:
-                            while temp[i + tempcounter].isdigit():
+                            while temp[i + tempcounter].isdigit():  # sorts through the power of x till ')' is found
                                 tempcounter = tempcounter + 1
-                        if not trig:
+                        if not trig:  # appends the power joined with x**
                             tempEquation.append('x**' + ''.join(temp[i + 2: i + tempcounter]))
 
         match temp[i]:
-            case 'e':
+            case 'e':  # sees if Euler's constant is being used
                 match temp[i + 1]:
-                    case '^':
-                        tempcounter = 2
+                    case '^':  # checks if e is set to the power of something
+                        tempcounter = 2  # preset to iterate through equation
 
-                        while temp[i + tempcounter] != 'x':
+                        while temp[i + tempcounter] != 'x':  # checks for every integer before e
                             tempcounter = tempcounter + 1
-                        tempstring = ''.join(temp[i + 2: i + tempcounter])
-                        tempnumber = i + tempcounter
+                        tempstring = ''.join(temp[i + 2: i + tempcounter])  # temporary store for everything before x
+                        tempnumber = i + tempcounter  # needed a secondary counter to reference at finalising
                         while temp[i + tempcounter + 1] != ')':
-                            tempcounter = tempcounter + 1
-                        tempEquation.append('np.exp(' + tempstring + ''.join(temp[tempnumber: i + tempcounter+1]) + ')')
-        # match temp[i]:
-        #     case temp[i] ==):
-
-
-
+                            tempcounter = tempcounter + 1  # goes until the end of the function
+                        tempEquation.append(
+                            'np.exp(' + tempstring + '*' + ''.join(temp[tempnumber: i + tempcounter + 1]) + ')')
+                        # tempstring is everything before x and then tempnumber is just after the x
 
     print(tempEquation)
-    tempEquation = ['(' + x + ')' for x in tempEquation]
+    tempEquation = ['(' + x + ')' for x in tempEquation]  # surrounds every element with brackets
     equation = []
     for i in range(len(tempEquation)):
         print(tempEquation)
         print(equation)
-        equation.append(tempEquation[i])
-        equation.append('*')
+        equation.append(tempEquation[i])  # adds everything from tempEquation to equation
+        equation.append('*')  # multiplies everything together
     equation.pop()
     print(''.join(equation))
+
+
 sorting(user)

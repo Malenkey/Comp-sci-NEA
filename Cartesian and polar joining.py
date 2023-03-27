@@ -15,6 +15,156 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Button, RadioButtons, TextBox, Slider
 from subprocess import call
 
+#####################################sorting function####################################
+
+def sorting(equation):
+    temp = ['', '', '']
+
+    tempEquation = []
+
+    equation = str(equation)
+    for i in equation:
+        temp.append(i)
+    temp.append('')
+
+    for i in range(len(temp)):
+        tempcharacters = []
+
+        match temp[i]:
+            case '+':
+                tempEquation.append(temp[i])
+            case '-':
+                tempEquation.append(temp[i])
+            case '/':
+                tempEquation.append(temp[i])
+            case '*':
+                tempEquation.append(temp[i])
+        match ''.join(temp[i:i + 3]):
+            case 'sin':
+                match temp[i + 3]:
+                    case '(':
+                        bracket = True
+                        tempcounter = 1
+                        while bracket:
+                            while tempcounter != 0:
+                                if temp[i + 3 + tempcounter] == ')':
+                                    tempEquation.append('np.sin(' + ''.join(tempcharacters) + ')')
+                                    bracket = False
+                                    tempcounter = 0
+                                else:
+                                    tempcharacters.append(temp[i + 3 + tempcounter])
+                                    tempcounter = tempcounter + 1
+
+                    case _:
+                        print('error')
+
+            case 'cos':
+                match temp[i + 3]:
+                    case '(':
+                        bracket = True
+                        tempcounter = 1
+                        while bracket:
+                            while tempcounter != 0:
+                                if temp[i + 3 + tempcounter] == ')':
+                                    tempEquation.append('np.cos(' + ''.join(tempcharacters) + ')')
+                                    bracket = False
+                                    tempcounter = 0
+                                else:
+                                    tempcharacters.append(temp[i + 3 + tempcounter])
+                                    tempcounter = tempcounter + 1
+
+                    case _:
+                        print('error')
+
+            case 'tan':
+                match temp[i + 3]:
+                    case '(':
+                        bracket = True
+                        tempcounter = 1
+                        while bracket:
+                            while tempcounter != 0:
+                                if temp[i + 3 + tempcounter] == ')':
+                                    tempEquation.append('np.tan(' + ''.join(tempcharacters) + ')')
+                                    bracket = False
+                                    tempcounter = 0
+                                else:
+                                    tempcharacters.append(temp[i + 3 + tempcounter])
+                                    tempcounter = tempcounter + 1
+
+                    case _:
+                        print('error')
+        match temp[i]:
+            case 'x':
+                match temp[i - 1]:
+                    case ')':
+                        tempEquation.append('x')
+                    case '':
+                        tempEquation.append('x')
+
+                match temp[i + 1]:
+                    case '^':
+
+                        tempcounter = 2
+                        tempcounter2 = 1
+                        trig = False
+                        bracket = False
+
+                        while not bracket:
+                            if temp[i - tempcounter2] == '^':
+                                bracket = True
+                            if temp[i - tempcounter2] == '':
+                                bracket = True
+                            if temp[i - tempcounter2] == '(':
+                                bracket = True
+                            if temp[i - tempcounter2] == ')':
+                                bracket = True
+                            tempcounter2 = tempcounter2 + 1
+
+                        if temp[i - tempcounter2] == 'n':
+                            trig = True
+                        if temp[i - tempcounter2] == 's':
+                            trig = True
+                        if temp[i - tempcounter2] == 'e':
+                            trig = True
+
+                        else:
+                            while temp[i + tempcounter].isdigit():
+                                tempcounter = tempcounter + 1
+                        if not trig:
+                            tempEquation.append('x**' + ''.join(temp[i + 2: i + tempcounter]))
+
+        match temp[i]:
+            case 'e':
+                match temp[i + 1]:
+                    case '^':
+                        tempcounter = 2
+
+                        while temp[i + tempcounter] != 'x':
+                            tempcounter = tempcounter + 1
+                        tempstring = ''.join(temp[i + 2: i + tempcounter])
+                        tempnumber = i + tempcounter
+                        while temp[i + tempcounter + 1] != ')':
+                            tempcounter = tempcounter + 1
+                        tempEquation.append('np.exp(' + tempstring + ''.join(temp[tempnumber: i + tempcounter+1]) + ')')
+
+
+    equation = []
+
+    tempEquation = ['(' + x + ')' for x in tempEquation]
+    for i in range(len(tempEquation)):
+
+        equation.append(tempEquation[i])
+        equation.append('*')
+
+    equation.pop()
+    final = ''.join(equation)
+
+    ydata = eval(final)
+    l.set_ydata(ydata)
+    ax.set_ylim(np.min(ydata), np.max(ydata))
+    plt.draw()
+
+
 
 ##############################defining functions and routines##############################
 
@@ -36,11 +186,6 @@ def stylefunc(label):
     plt.draw()
 
 
-def submit(text):
-    ydata = eval(text)
-    l.set_ydata(ydata)
-    ax.set_ylim(np.min(ydata), np.max(ydata))
-    plt.draw()
 
 
 def polar_toggle(text):
@@ -88,7 +233,7 @@ text_box = TextBox(ax_box, 'Evaluate', initial=initial_text)
 
 ################################## when interacted with ###################################################
 
-text_box.on_submit(submit)
+text_box.on_submit(sorting)
 
 grid_button.on_clicked(grid)
 
