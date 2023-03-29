@@ -1,4 +1,4 @@
-user = input("type something bozo")
+user = input("type something ")
 
 
 def sorting(equation):
@@ -9,9 +9,6 @@ def sorting(equation):
         temp.append(i)
 
     for i in range(len(temp)):
-
-
-
 ##############################Trig value filter#################################
 
         if ''.join(temp[i:i + 6]) == 'sin(x)':
@@ -72,7 +69,7 @@ def sorting(equation):
         if tempEquation[i] == '( )':
             tempEquation[i] = ' '
 
-    tempEquation.remove(' ')
+    # tempEquation.remove(' ')
 
     print(tempEquation)
     print(''.join(tempEquation))

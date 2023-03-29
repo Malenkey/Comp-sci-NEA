@@ -16,19 +16,15 @@ def radial(box_input):
 
 def radius_limit(box_input):
     global polar_l
-    print('hello', theta)
     ax.cla()
     radial(box_input)
     polar_l = ax.plot(theta, radius, color='red')
 
 
 def theta_max(val):
-    global theta
-    print(radius)
-    print(max_slider.val)
+    global theta, polar_l
     theta_limits(max_slider.val)
     polar_l = ax.plot(theta, radius, color='red')
-
     fig.canvas.draw_idle()
 
 
@@ -60,8 +56,7 @@ radius_box = TextBox(ax_radius, 'Radius', initial='1')
 
 #######################when interacted with####################
 
-# theta_box1.on_submit(theta_limits( ,text))
-# theta_box2.on_submit()
+
 max_slider.on_changed(theta_max)
 
 radius_box.on_submit(radius_limit)

@@ -177,6 +177,9 @@ def grid(this_text_needs_to_be_here):
 
 
 def colorfunc(label):
+    """
+    sadfasdf
+    """
     l.set_color(label)
     plt.draw()
 
@@ -189,7 +192,6 @@ def stylefunc(label):
 
 
 def polar_toggle(text):
-    plt.close()
     call(["python", "Polar3.py"])
 
 
